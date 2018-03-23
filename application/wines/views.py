@@ -12,8 +12,9 @@ def wines_form():
 
 @app.route("/wines/", methods=["POST"])
 def wines_create():
-    temp = request.form.getlist('param')
-    w = Wine(temp[0], temp[1])
+    name = request.form['name']
+    rating = request.form['rating']
+    w = Wine(name, rating)
     db.session().add(w)
     db.session().commit()
   
