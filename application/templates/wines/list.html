@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Wine</th>
+      <th>Rating</th>
+    </tr>
+    {% for wine in wines %}
+    <tr>
+      <td>{{ wine.name }}</td>
+      <td>{{ wine.rate }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+{% endblock %}
