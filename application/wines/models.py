@@ -9,6 +9,6 @@ class Wine(db.Model):
     name = db.Column(db.String(144), nullable=False)
     rate = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name, rate):
+    def __init__(self, name):
         self.name = name
         self.rate = 0

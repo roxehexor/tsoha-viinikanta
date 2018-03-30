@@ -1,6 +1,7 @@
-from application import app, db
 from flask import redirect, render_template, request, url_for
+from application import app, db
 from application.wines.models import Wine
+from application.wines.forms import WineForm
 
 @app.route("/wines", methods=["GET"])
 def wines_index():
@@ -8,13 +9,18 @@ def wines_index():
 
 @app.route("/wines/new/")
 def wines_form():
-    return render_template("wines/new.html")
+    return render_template("wines/new.html", form = WineForm())
 
 @app.route("/wines/", methods=["POST"])
 def wines_create():
-    name = request.form['name']
-    rating = request.form['rating']
-    w = Wine(name, rating)
+    form = WineForm(request.form)
+
+    if not form.validate():
+        return render_template("wines/new.html", form = form)
+
+    w = Wine(form.name.data)
+    w.rate = form.rate.data
+    
     db.session().add(w)
     db.session().commit()
   
